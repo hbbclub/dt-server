@@ -1,11 +1,11 @@
-var Question = require('mongoose').model("question")
+var Question = require('mongoose').model("Question")
 var utils = require('../utils/utils');
 
 exports.findQuestionList = function (req, res, next) {
-    var {page_number,page_size} = req.body;
+    var {page_number, page_size} = req.body;
     page_number || (page_number = 0);
     page_size || (page_size = 10);
-    Question.find().skip(page_number*page_size).limit(page_size)
+    Question.find().skip(page_number * page_size).limit(page_size)
         .then((data) => {
             utils.abortAndSendJsonToClient(null, req, res, data)
         })
@@ -14,7 +14,7 @@ exports.findQuestionList = function (req, res, next) {
         })
 };
 
-exports.saveQuestionList = function (req, res, next) {
+exports.addQuestionList = function (req, res, next) {
     var question = new Question(req.body);
     question.save()
         .then(() => {

@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var QuestionSchema = new Schema({
-    title:{
+    title: {
         type: String,
         trim: true,
         required: "标题不能为空!"
@@ -26,4 +26,4 @@ var QuestionSchema = new Schema({
 
 }, {timestamps: {createdAt: 'created', updatedAt: 'updated'}, collection: "questions"});
 
-mongoose.model("question", QuestionSchema);
+mongoose.model("Question", QuestionSchema);
