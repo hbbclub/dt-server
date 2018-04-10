@@ -13,7 +13,10 @@ var ReportSchema = new Schema({
     qsList: {type: Schema.ObjectId, ref: 'Question'},
     answer: {
         type: Array,
-        request: '请答卷'
+        validate: [
+            answer => answer && answer.length ,
+            "answer is null"
+        ]
     },
 }, {timestamps: {createdAt: 'created', updatedAt: 'updated'}, collection: "report"});
 
@@ -21,7 +24,7 @@ var ReportSchema = new Schema({
 ReportSchema.statics = {
     findReportById: function (id) {
         return this
-            .findOne({_id: id}).populate({path:'user',select:{'password':0},}).populate('qsList')
+            .findOne({_id: id}).populate({path: 'user', select: {'password': 0},}).populate('qsList')
             .exec();
     }
 }
