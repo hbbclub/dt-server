@@ -26,6 +26,11 @@ ReportSchema.statics = {
         return this
             .findOne({_id: id}).populate({path: 'user', select: {'password': 0},}).populate('qsList')
             .exec();
+    },
+    findReportByUserId: function (id) {
+        return this
+            .find({user: id}).populate({path: 'user', select: {'password': 0},}).populate('qsList')
+            .exec();
     }
 }
 

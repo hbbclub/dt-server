@@ -6,5 +6,7 @@ router.route("/addReport")
     .post(report.addReport);
 router.route("/findReport")
     .post(report.findReport);
+router.route("/findReportByUserId")
+    .post(report.findReportByUserId);
 
 module.exports = router;
