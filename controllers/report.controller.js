@@ -2,6 +2,8 @@ var Report = require('mongoose').model("Report")
 var utils = require('../utils/utils');
 
 exports.addReport = function (req, res, next) {
+    utils.assertMustParameter(req, res, ["user","qsList"]);
+
     var report = new Report(req.body);
     report.save()
         .then(() => {
@@ -11,7 +13,6 @@ exports.addReport = function (req, res, next) {
             utils.abortAndSendJsonToClient(err, req, res, null)
         })
 };
-
 
 exports.findReport = function (req, res, next) {
     utils.assertMustParameter(req, res, ["_id"]);
