@@ -26,9 +26,7 @@ exports.addQuestionList = function (req, res, next) {
 };
 
 exports.deleteQuestionList = function (req, res, next) {
-    if (!req.body.listId) {
-        utils.abortAndSendJsonToClient(new Error("List id is null"), req, res, null)
-    }
+    utils.assertMustParameter(req,res,["listId"])
     Question.remove({_id: req.body.listId})
         .then(() => {
             utils.abortAndSendJsonToClient(null, req, res, {_id: Question._id})
