@@ -31,6 +31,10 @@ var UserSchema = new Schema({
         type: String,
         enum: ['男', '女']
     },
+    name: {
+        type: String,
+        required: "姓名不能为空"
+    },
     items: [{type: String}]
 }, {timestamps: {createdAt: 'created', updatedAt: 'updated'},collection: "user"});
 mongoose.model("User", UserSchema);
