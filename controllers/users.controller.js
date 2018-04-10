@@ -6,10 +6,10 @@ exports.signup = function (req, res, next) {
     var user = new User(req.body);
     user.save()
         .then(() => {
-           utils.abortAndSendJsonToClient(null,req,res,{_id: user._id})
+            return utils.sendJsonToClient(null, req, res, {_id: user._id})
         })
         .catch(err => {
-            utils.abortAndSendJsonToClient(err,req,res,null)
+            return utils.sendJsonToClient(err, req, res, null)
         })
 }
 
@@ -18,9 +18,9 @@ exports.signin = function (req, res, next) {
         "local",
         function (err, user, info) {
             if (!user) {
-                utils.abortAndSendJsonToClient(new Error(info.msg),req,res,null)
+                return utils.sendJsonToClient(new Error(info.msg), req, res, null)
             }
-            utils.abortAndSendJsonToClient(err,req,res,{_id: user._id})
+            return utils.sendJsonToClient(err, req, res, {_id: user._id})
         }
     )(req, res, next);
 }
